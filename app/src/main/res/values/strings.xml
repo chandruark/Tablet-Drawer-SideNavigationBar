@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PlaygroundDR</string>
+    <string name="title_tabviewpanelayout_detail">TabViewPaneLayout Detail</string>
+    <string name="view_main_header__email">xxyyzz.gmail.com</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close</string>
+    <string name="title_activity_sample">SampleActivity</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+</resources>
