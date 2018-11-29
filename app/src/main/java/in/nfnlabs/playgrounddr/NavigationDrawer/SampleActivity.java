@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import in.nfnlabs.playgrounddr.R;
 
@@ -84,7 +85,9 @@ public class SampleActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Toast.makeText(this, "hai", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_gallery) {
+            Toast.makeText(this, "hello", Toast.LENGTH_SHORT).show();
 
         } else if (id == R.id.nav_slideshow) {
 
@@ -97,7 +100,7 @@ public class SampleActivity extends AppCompatActivity
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        drawer.closeDrawer(GravityCompat.END);
         return true;
     }
 }

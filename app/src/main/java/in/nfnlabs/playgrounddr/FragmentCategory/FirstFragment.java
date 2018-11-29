@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import in.nfnlabs.playgrounddr.R;
+
 public class FirstFragment extends Fragment {
     @Override
     public Lifecycle getLifecycle() {
@@ -22,7 +24,7 @@ public class FirstFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.fragment_first, container, false);
     }
 
     @Override

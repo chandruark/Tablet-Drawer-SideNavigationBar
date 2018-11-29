@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,14 +16,22 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import in.nfnlabs.playgrounddr.AdapterClasses.SimpleItemRecyclerViewAdapter;
+import in.nfnlabs.playgrounddr.FragmentCategory.FirstFragment;
+import in.nfnlabs.playgrounddr.FragmentCategory.FourthFragment;
+import in.nfnlabs.playgrounddr.FragmentCategory.SecondFragment;
 import in.nfnlabs.playgrounddr.FragmentCategory.TabViewPaneLayoutDetailFragment;
+import in.nfnlabs.playgrounddr.FragmentCategory.ThirdFragment;
 import in.nfnlabs.playgrounddr.model.ListPaneModel;
 
 import java.util.ArrayList;
@@ -33,18 +45,23 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class TabViewPaneLayoutListActivity extends AppCompatActivity {
+public class TabViewPaneLayoutListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private boolean mTwoPane;
-    public List<ListPaneModel> listitems = new ArrayList<>();
+    private static final String TAG = "TabViewPaneLayoutListAc";
+    private Fragment fragment = null;
+    private Class fragmentClass;
+    private FragmentManager fragmentManager;
+    private NavigationView nav;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tabviewpanelayout_list);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,6 +72,26 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
         toggle.syncState();
+
+        nav = (NavigationView) findViewById(R.id.nav);
+        nav.setNavigationItemSelectedListener(this);
+        //setupDrawerContent(nav);
+
+        selectDrawerItem(R.id.nav_camera);
+
+
+/**
+ * default selected item in Navigation menu
+ */
+/*
+        if (savedInstanceState == null) {
+            // Insert the fragment by replacing any existing fragment
+            fragmentClass = FirstFragment.class;
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.tabviewpanelayout_detail_container, fragment).commit();
+            // Highlight the selected item has been done by NavigationView
+            nav.getMenu().findItem(0).setChecked(true);
+        }*/
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 
@@ -69,12 +106,6 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity {
         });
 
 
-
-        listitems.add(new ListPaneModel("0", "FirstFragment","none"));
-        listitems.add(new ListPaneModel("1 ", "SecondFragment","none"));
-        listitems.add(new ListPaneModel("2", "ThirdFragment","none"));
-        listitems.add(new ListPaneModel("3", "FourFragment","none"));
-        listitems.add(new ListPaneModel("4", "FiveFragment","none"));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -95,14 +126,105 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.tabviewpanelayout_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
     }
 
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, listitems, mTwoPane));
+    /*private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+
+                    }
+                });
+
+    }*/
+
+    public void selectDrawerItem(int menuItemId) {
+                        // Create a new fragment and specify the fragment to show based on nav item clicked
+        switch(menuItemId) {
+            case R.id.nav_camera:
+                fragmentClass = FirstFragment.class;
+                break;
+            case R.id.nav_gallery:
+                fragmentClass = SecondFragment.class;
+                break;
+            case R.id.nav_manage:
+                fragmentClass = ThirdFragment.class;
+                break;
+            case R.id.nav_share:
+                fragmentClass = FourthFragment.class;
+                break;
+            case R.id.nav_send:
+                fragmentClass = FirstFragment.class;
+                break;
+            default:
+                fragmentClass = FirstFragment.class;
+        }
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Insert the fragment by replacing any existing fragment
+        if (fragment != null) {
+            fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.tabviewpanelayout_detail_container, fragment).commit();
+        }
+        // Highlight the selected item has been done by NavigationView
+
+        // Set action bar title
+
+        // Close the navigation drawer
+
     }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.sample, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+        selectDrawerItem(menuItem.getItemId());
+        menuItem.setChecked(true);
+
+        return true;
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+//    private void setupRecyclerView(@NonNull Recyc2lerView recyclerView) {
+//        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, listitems, mTwoPane));
+//    }
 
 
 }

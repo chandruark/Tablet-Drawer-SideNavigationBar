@@ -15,21 +15,16 @@
     <!--
     This layout is a two-pane layout for the Notes
     master/detail flow.
-    
+
     -->
 
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/tabviewpanelayout_list"
-        android:name="in.nfnlabs.playgrounddr.TabViewPaneLayoutListFragment"
-        android:layout_width="@dimen/item_width"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="in.nfnlabs.playgrounddr.TabViewPaneLayoutListActivity"
-        tools:listitem="@layout/tabviewpanelayout_list_content" />
-
+        android:layout_gravity="end"
+        android:fitsSystemWindows="true"
+        app:menu="@menu/activity_sample_drawer" />
     <FrameLayout
         android:id="@+id/tabviewpanelayout_detail_container"
         android:layout_width="0dp"
