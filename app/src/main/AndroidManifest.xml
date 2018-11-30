@@ -15,7 +15,9 @@
         <activity
             android:name=".TabViewPaneLayoutListActivity"
             android:label="@string/app_name"
-            android:theme="@style/NavigationStyle">
+            android:theme="@style/NavigationStyle"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

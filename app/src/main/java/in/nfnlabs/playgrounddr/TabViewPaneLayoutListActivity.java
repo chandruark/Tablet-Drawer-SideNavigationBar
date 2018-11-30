@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import in.nfnlabs.playgrounddr.AdapterClasses.SimpleItemRecyclerViewAdapter;
 import in.nfnlabs.playgrounddr.FragmentCategory.FirstFragment;
+import in.nfnlabs.playgrounddr.FragmentCategory.FirstNestedFragment;
 import in.nfnlabs.playgrounddr.FragmentCategory.FourthFragment;
 import in.nfnlabs.playgrounddr.FragmentCategory.SecondFragment;
 import in.nfnlabs.playgrounddr.FragmentCategory.TabViewPaneLayoutDetailFragment;
@@ -53,6 +54,12 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
      */
     private boolean mTwoPane;
     private static final String TAG = "TabViewPaneLayoutListAc";
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private Fragment fragment = null;
     private Class fragmentClass;
     private FragmentManager fragmentManager;
@@ -76,6 +83,7 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
         nav = (NavigationView) findViewById(R.id.nav);
         nav.setNavigationItemSelectedListener(this);
         //setupDrawerContent(nav);
+
 
         selectDrawerItem(R.id.nav_camera);
 
@@ -145,7 +153,7 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
                         // Create a new fragment and specify the fragment to show based on nav item clicked
         switch(menuItemId) {
             case R.id.nav_camera:
-                fragmentClass = FirstFragment.class;
+                fragmentClass = FirstNestedFragment.class;
                 break;
             case R.id.nav_gallery:
                 fragmentClass = SecondFragment.class;
@@ -189,6 +197,7 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.sample, menu);
+
         return true;
     }
 
