@@ -46,8 +46,11 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class TabViewPaneLayoutListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener  {
-
+public class TabViewPaneLayoutListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    FirstFragment firstFragment;
+    SecondFragment secondFragment;
+    ThirdFragment thirdFragment;
+    FourthFragment fourthFragment;
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -61,9 +64,10 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
     }
 
     private Fragment fragment = null;
-    private Class fragmentClass;
+    private Fragment fragmentClass;
     private FragmentManager fragmentManager;
     private NavigationView nav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,10 +97,10 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
  */
 /*
         if (savedInstanceState == null) {
-            // Insert the fragment by replacing any existing fragment
+            // Insert the fragment_landing by replacing any existing fragment_landing
             fragmentClass = FirstFragment.class;
             fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.tabviewpanelayout_detail_container, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.tabviewpanelayout_detail_container, fragment_landing).commit();
             // Highlight the selected item has been done by NavigationView
             nav.getMenu().findItem(0).setChecked(true);
         }*/
@@ -114,7 +118,6 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
         });
 
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +126,6 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
                         .setAction("Action", null).show();
             }
         });
-
 
 
         if (findViewById(R.id.tabviewpanelayout_detail_container) != null) {
@@ -150,38 +152,39 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
     }*/
 
     public void selectDrawerItem(int menuItemId) {
-                        // Create a new fragment and specify the fragment to show based on nav item clicked
-        switch(menuItemId) {
+        // Create a new fragment_landing and specify the fragment_landing to show based on nav item clickedz
+        switch (menuItemId) {
             case R.id.nav_camera:
-                fragmentClass = FirstNestedFragment.class;
+                if (firstFragment == null)
+                    firstFragment = new FirstFragment();
+                fragmentClass = firstFragment;
                 break;
             case R.id.nav_gallery:
-                fragmentClass = SecondFragment.class;
+                if (secondFragment == null)
+                    secondFragment = new SecondFragment();
+                fragmentClass = secondFragment;
                 break;
             case R.id.nav_manage:
-                fragmentClass = ThirdFragment.class;
+                if (thirdFragment == null)
+                    thirdFragment = new ThirdFragment();
+                fragmentClass = thirdFragment;
                 break;
             case R.id.nav_share:
-                fragmentClass = FourthFragment.class;
+                if (fourthFragment == null)
+                    fourthFragment = new FourthFragment();
+                fragmentClass = fourthFragment;
                 break;
             case R.id.nav_send:
-                fragmentClass = FirstFragment.class;
+                if (fourthFragment == null)
+                    fourthFragment = new FourthFragment();
+                fragmentClass = fourthFragment;
                 break;
             default:
-                fragmentClass = FirstFragment.class;
         }
 
-        try {
-            fragment = (Fragment) fragmentClass.newInstance();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        // Insert the fragment by replacing any existing fragment
-        if (fragment != null) {
-            fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.tabviewpanelayout_detail_container, fragment).commit();
+        // Insert the fragment_landing by replacing any existing fragment_landing
+        if (fragmentClass != null) {
+            fragmentManager.beginTransaction().replace(R.id.tabviewpanelayout_detail_container, fragmentClass).commit();
         }
         // Highlight the selected item has been done by NavigationView
 
@@ -190,7 +193,6 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
         // Close the navigation drawer
 
     }
-
 
 
     @Override

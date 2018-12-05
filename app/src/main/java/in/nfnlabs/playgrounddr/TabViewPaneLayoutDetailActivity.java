@@ -42,10 +42,10 @@ public class TabViewPaneLayoutDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // savedInstanceState is non-null when there is fragment state
+        // savedInstanceState is non-null when there is fragment_landing state
         // saved from previous configurations of this activity
         // (e.g. when rotating the screen from portrait to landscape).
-        // In this case, the fragment will automatically be re-added
+        // In this case, the fragment_landing will automatically be re-added
         // to its container so we don't need to manually add it.
         // For more information, see the Fragments API guide at:
         //

@@ -25,6 +25,7 @@
         android:layout_gravity="end"
         android:fitsSystemWindows="true"
         app:menu="@menu/activity_sample_drawer" />
+
     <FrameLayout
         android:id="@+id/tabviewpanelayout_detail_container"
         android:layout_width="0dp"

@@ -25,9 +25,8 @@ public class FirstNestedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
         View view = inflater.inflate(R.layout.fragment_nested, container, false);
-
-
 
         return view;
     }
@@ -37,10 +36,6 @@ public class FirstNestedFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
