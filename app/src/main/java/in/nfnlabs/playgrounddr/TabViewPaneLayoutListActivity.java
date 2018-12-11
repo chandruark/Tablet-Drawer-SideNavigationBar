@@ -183,9 +183,9 @@ public class TabViewPaneLayoutListActivity extends AppCompatActivity implements 
         }
 
         // Insert the fragment_landing by replacing any existing fragment_landing
-        if (fragmentClass != null) {
-            fragmentManager.beginTransaction().replace(R.id.tabviewpanelayout_detail_container, fragmentClass).commit();
-        }
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.tabviewpanelayout_detail_container, fragmentClass).commit();
+
         // Highlight the selected item has been done by NavigationView
 
         // Set action bar title

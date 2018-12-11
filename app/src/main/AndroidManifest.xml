@@ -3,29 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="in.nfnlabs.playgrounddr">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
+        android:screenOrientation="sensorLandscape"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".DragandDropconsole.PatientQueueActivity"
+            android:screenOrientation="sensorLandscape">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".TabViewPaneLayoutListActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/app_name"
-            android:screenOrientation="landscape"
-            android:theme="@style/NavigationStyle">
-
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/NavigationStyle" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DragandDropconsole.PatientQueueActivity" />
         </activity>
         <activity
             android:name=".TabViewPaneLayoutDetailActivity"
             android:label="@string/title_tabviewpanelayout_detail"
+            android:screenOrientation="sensorLandscape"
             android:parentActivityName=".TabViewPaneLayoutListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -37,12 +49,10 @@
             android:label="@string/title_activity_sample"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LandingActivity.LandingPageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+        <activity android:name=".LandingActivity.DragandDropGestureActivity" />
+
     </application>
 
 </manifest>

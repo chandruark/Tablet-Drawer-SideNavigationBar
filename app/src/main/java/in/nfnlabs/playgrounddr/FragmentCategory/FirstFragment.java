@@ -34,14 +34,6 @@ public class FirstFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
 
-    view.findViewById(R.id.btn_sample).setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-
-        Toast.makeText(getActivity(), "Hai hello", Toast.LENGTH_SHORT).show();
-    }
-});
-
         super.onViewCreated(view, savedInstanceState);
     }
 
